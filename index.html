@@ -1,31 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Trang Key Zalo</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      padding-top: 100px;
-    }
-    .key {
-      font-size: 24px;
-      color: red;
-    }
-  </style>
+  <title>Key Ngày Hôm Nay</title>
 </head>
 <body>
   <h1>🔑 KEY HÔM NAY LÀ:</h1>
-  <div class="key" id="keyBox">Đang tải...</div>
+  <p id="key">Đang tải...</p>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const key = params.get("key");
-
-    document.getElementById("keyBox").innerText = key
-      ? key
-      : "Không có key nào được truyền!";
+    if (key) {
+      document.getElementById("key").innerText = key;
+    } else {
+      document.getElementById("key").innerText = "Không có key nào được truyền.";
+    }
   </script>
 </body>
 </html>
