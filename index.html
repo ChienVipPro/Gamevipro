@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Key Ngày Hôm Nay</title>
+    <meta charset="UTF-8">
+    <title>Key Viewer</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: monospace;
+            font-size: 24px;
+            text-align: center;
+            margin-top: 100px;
+        }
+        .key-box {
+            padding: 20px;
+            border: 2px dashed #0f0;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-  <h1>🔑 KEY HÔM NAY LÀ:</h1>
-  <p id="key">Đang tải...</p>
+    <div class="key-box">
+        KEY: <span id="keyValue">Đang tải...</span>
+    </div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const key = params.get("key");
-    if (key) {
-      document.getElementById("key").innerText = key;
-    } else {
-      document.getElementById("key").innerText = "Không có key nào được truyền.";
-    }
-  </script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const key = params.get("key");
+        if (key) {
+            document.getElementById("keyValue").textContent = key;
+        } else {
+            document.getElementById("keyValue").textContent = "Không có key nào được truyền!";
+        }
+    </script>
 </body>
 </html>
