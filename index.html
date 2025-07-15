@@ -1,37 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Key Viewer</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #0f0;
-            font-family: monospace;
-            font-size: 24px;
-            text-align: center;
-            margin-top: 100px;
-        }
-        .key-box {
-            padding: 20px;
-            border: 2px dashed #0f0;
-            display: inline-block;
-        }
-    </style>
+    <title>Trang Chủ Của Tôi</title>
 </head>
 <body>
-    <div class="key-box">
-        KEY: <span id="keyValue">Đang tải...</span>
-    </div>
-
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const key = params.get("key");
-        if (key) {
-            document.getElementById("keyValue").textContent = key;
-        } else {
-            document.getElementById("keyValue").textContent = "Không có key nào được truyền!";
-        }
-    </script>
+    <h1>Chào mừng bạn đến với trang phụ</h1>
+    <p>Đây là trang: <strong>/trangchucuatoi</strong></p>
+    <a href="/">← Quay lại trang chính</a>
 </body>
 </html>
