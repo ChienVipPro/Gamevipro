@@ -1,13 +1,172 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Trang Chủ Của Tôi</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donate Support</title>
+  <style>
+    /* Reset & base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      transition: background 0.5s, color 0.5s;
+      overflow-x: hidden;
+    }
+    .light-mode {
+      background: #ffffff;
+      color: #000000;
+    }
+    .dark-mode {
+      background: #0f0f0f;
+      color: #ffffff;
+    }
+
+    /* Centered content */
+    .container {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    /* Colorful glowing title */
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      animation: colorChange 2s infinite linear;
+      text-shadow: 0 0 8px #fff;
+    }
+
+    @keyframes colorChange {
+      0% { color: red; }
+      25% { color: orange; }
+      50% { color: green; }
+      75% { color: blue; }
+      100% { color: violet; }
+    }
+
+    /* Toggle button */
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background: #444;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+    .toggle-btn:hover {
+      background: #666;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      margin: 15px;
+      padding: 12px 25px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #007bff;
+    }
+
+    /* Donate QR */
+    .qr {
+      width: 200px;
+      margin-top: 30px;
+      border: 4px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #999;
+    }
+
+    /* Snowflakes */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      user-select: none;
+      z-index: 9999;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Fireworks */
+    .firework {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: red;
+      animation: explode 0.8s ease-out forwards;
+      z-index: 9999;
+    }
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(6); opacity: 0; }
+    }
+  </style>
 </head>
-<body>
-    <h1>Chào mừng bạn đến với trang phụ</h1>
-    <p>Đây là trang: <strong>/trangchucuatoi</strong></p>
-    <a href="/">← Quay lại trang chính</a>
+<body class="light-mode">
+  <button class="toggle-btn" onclick="toggleMode()">🌙/☀️</button>
+
+  <div class="container">
+    <div class="title">CẢM ƠN BẠN ĐÃ ỦNG HỘ!</div>
+
+    <img src="https://i.imgur.com/Zc6QmYk.png" alt="QR Donate" class="qr"><br>
+
+    <a href="https://zalo.me/g/123456789" class="btn" target="_blank">🔗 Vào nhóm Zalo</a>
+    <a href="https://www.tiktok.com/@yourtiktok" class="btn" target="_blank">🎵 Tiktok</a>
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+      document.body.classList.toggle("light-mode");
+    }
+
+    // Snowflakes
+    function createSnowflake() {
+      const snow = document.createElement('div');
+      snow.className = 'snowflake';
+      snow.style.left = Math.random() * window.innerWidth + 'px';
+      snow.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      snow.textContent = '❄️';
+      snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      document.body.appendChild(snow);
+      setTimeout(() => snow.remove(), 10000);
+    }
+    setInterval(createSnowflake, 200);
+
+    // Fireworks
+    function createFirework() {
+      const firework = document.createElement('div');
+      firework.className = 'firework';
+      firework.style.left = Math.random() * window.innerWidth + 'px';
+      firework.style.top = Math.random() * window.innerHeight + 'px';
+      firework.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1000);
+    }
+    setInterval(createFirework, 1200);
+  </script>
 </body>
 </html>
