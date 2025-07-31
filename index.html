@@ -1085,30 +1085,7 @@
         const footer = document.querySelector('footer');
         observer.observe(footer);
 
-        // Add floating effect to cards on mouse move
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.card:not(:hover)');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const angleY = (x - centerX) / 25;
-                const angleX = (centerY - y) / 25;
-                
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-5px) scale(1.02)`;
-            });
-        });
-
-        // Reset card position when mouse leaves card area
-        document.addEventListener('mouseleave', () => {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
+        
         });
     </script>
 </body>
