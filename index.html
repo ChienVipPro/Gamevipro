@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Cá Nhân - Kênh YouTube & TikTok</title>
+    <title>Trang Cá Nhân Game Thủ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
     <style>
         :root {
             --primary-color: #3498db;
@@ -36,7 +35,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Be Vietnam Pro', 'Montserrat', sans-serif;
+            font-family: 'Be Vietnam Pro', sans-serif;
         }
 
         body {
@@ -45,7 +44,6 @@
             line-height: 1.6;
             transition: var(--transition);
             overflow-x: hidden;
-            background: linear-gradient(135deg, var(--bg-color) 0%, #2c3e50 100%);
             min-height: 100vh;
             position: relative;
         }
@@ -93,10 +91,10 @@
             background: var(--card-bg);
             box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
             z-index: 999;
+            transform: translateX(-100%);
             transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             padding: 80px 20px 20px;
             overflow-y: auto;
-            transform: translateX(-100%);
         }
 
         .side-menu.open {
@@ -223,10 +221,72 @@
 
         .mod-service:hover {
             background: rgba(155, 89, 182, 0.2);
+            transform: translateY(-2px);
         }
 
         .mod-service i {
             color: var(--accent-color);
+        }
+
+        .other-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .other-link {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .other-link:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+
+        .platform-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .platform-info {
+            flex: 1;
+        }
+
+        .platform-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .platform-desc {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Màu sắc riêng cho từng nền tảng */
+        .other-link[data-link="tiktok"] .platform-icon {
+            color: #FE2C55;
+            background: rgba(254, 44, 85, 0.1);
+        }
+
+        .other-link[data-link="ytb1"] .platform-icon,
+        .other-link[data-link="ytb2"] .platform-icon {
+            color: #FF0000;
+            background: rgba(255, 0, 0, 0.1);
         }
 
         .container {
@@ -349,15 +409,6 @@
             50% { color: var(--accent-color); }
             75% { color: #2ecc71; }
             100% { color: #f1c40f; }
-        }
-
-        .blink-text {
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; text-shadow: 0 0 10px var(--accent-color); }
         }
 
         .marquee-text {
@@ -596,36 +647,27 @@
             100% { transform: translateY(0px); }
         }
 
-        .character {
-            position: absolute;
-            bottom: -50px;
-            right: 50px;
-            width: 200px;
-            opacity: 0.1;
-            z-index: -1;
-            transition: var(--transition);
-        }
-
-        .character.visible {
-            opacity: 0.15;
-            bottom: -30px;
-        }
-
-        /* Donate Box */
-        .donate-box {
-            border: 3px solid var(--primary-color);
-            border-radius: 10px;
-            padding: 15px;
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            animation: fadeInOut 3s ease;
+            font-weight: 500;
+            min-width: 250px;
             text-align: center;
-            margin-top: 15px;
-            transition: border-color 1s ease;
         }
 
-        .donate-box img {
-            width: 100%;
-            max-width: 200px;
-            height: auto;
-            border-radius: 5px;
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
         /* Welcome Box */
@@ -672,62 +714,6 @@
             transform: scale(1.05);
         }
 
-        /* Toast Notification */
-        .toast-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-color);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: var(--shadow);
-            z-index: 1000;
-            animation: fadeInOut 3s ease;
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-
-        /* Meteor Shower */
-        .meteor-shower {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .meteor {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 5px 2px white;
-            animation: meteorFall linear infinite;
-        }
-
-        @keyframes meteorFall {
-            0% {
-                transform: translateX(0) translateY(0);
-                opacity: 1;
-            }
-            70% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(500px) translateY(300px);
-                opacity: 0;
-            }
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             main {
@@ -744,10 +730,6 @@
             
             .title {
                 font-size: 1rem;
-            }
-            
-            .character {
-                display: none;
             }
             
             .marquee-text {
@@ -796,28 +778,36 @@
         </div>
         
         <div class="menu-section">
-            <h3>Khác</h3>
+            <h3>Liên Kết Khác</h3>
             <div class="other-links">
                 <a href="#" class="other-link" data-link="tiktok">
-                    <i class="fab fa-tiktok"></i> TikTok
+                    <div class="platform-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">TikTok</div>
+                        <div class="platform-desc">Video ngắn hấp dẫn</div>
+                    </div>
                 </a>
                 <a href="#" class="other-link" data-link="ytb1">
-                    <i class="fab fa-youtube"></i> YouTube 1
+                    <div class="platform-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">YouTube 1</div>
+                        <div class="platform-desc">Kênh chính thức</div>
+                    </div>
                 </a>
                 <a href="#" class="other-link" data-link="ytb2">
-                    <i class="fab fa-youtube"></i> YouTube 2
+                    <div class="platform-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">YouTube 2</div>
+                        <div class="platform-desc">Kênh phụ</div>
+                    </div>
                 </a>
             </div>
-            <div class="donate-box" id="donate-box">
-                <img src="khac/donate.png" alt="Donate QR Code">
-                <p>Ủng hộ tôi qua QR Code</p>
-            </div>
-        </div>
-        
-        <div class="menu-section">
-            <h3>Liên Hệ</h3>
-            <p>Email: contact@example.com</p>
-            <p>Điện thoại: 0123.456.789</p>
         </div>
     </div>
 
@@ -832,9 +822,6 @@
         <div class="marquee-text">
             "Nắng nóng đã có điều hòa, hết tiền đã có fake bill lo"
         </div>
-        
-        <!-- Character image -->
-        <img src="https://cdn.pixabay.com/photo/2021/08/27/06/06/gamer-6577420_960_720.png" alt="Gamer Character" class="character">
     </header>
 
     <!-- Main Content -->
@@ -870,10 +857,6 @@
                         <a href="#" class="link-item">
                             <i class="fab fa-discord"></i>
                             <span>Cộng đồng Discord</span>
-                        </a>
-                        <a href="#" class="link-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>Liên hệ hợp tác</span>
                         </a>
                     </div>
                 </div>
@@ -934,9 +917,6 @@
         </div>
     </footer>
 
-    <!-- Meteor Shower -->
-    <div class="meteor-shower"></div>
-
     <script>
         // Menu toggle
         const menuBtn = document.getElementById('menu-btn');
@@ -954,6 +934,7 @@
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
+        const clickSound = new Audio('music/click.mp3');
         
         // Check for saved theme preference
         if (localStorage.getItem('theme') === 'dark') {
@@ -962,6 +943,7 @@
         }
         
         themeToggle.addEventListener('change', () => {
+            clickSound.play();
             body.classList.toggle('dark-mode');
             localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
             
@@ -981,7 +963,6 @@
         // Music Player
         const toggleMusicBtn = document.getElementById('toggle-music');
         let currentMusic = null;
-        const clickSound = new Audio('music/click.mp3');
         let isMusicPlaying = false;
 
         toggleMusicBtn.addEventListener('click', function() {
@@ -1046,14 +1027,6 @@
             });
         });
 
-        // Donate box border color change
-        const donateBox = document.getElementById('donate-box');
-        setInterval(() => {
-            const colors = ['#3498db', '#e74c3c', '#9b59b6', '#2ecc71', '#f1c40f'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            donateBox.style.borderColor = randomColor;
-        }, 2000);
-
         // Welcome message
         if (!sessionStorage.getItem('welcomeShown')) {
             setTimeout(() => {
@@ -1084,30 +1057,6 @@
             }, 1000);
         }
 
-        // Meteor shower
-        function createMeteor() {
-            const meteor = document.createElement('div');
-            meteor.className = 'meteor';
-            
-            // Random vị trí bắt đầu
-            const startX = Math.random() * window.innerWidth;
-            const startY = Math.random() * window.innerHeight / 2;
-            
-            meteor.style.left = `${startX}px`;
-            meteor.style.top = `${startY}px`;
-            meteor.style.animationDuration = `${Math.random() * 2 + 1}s`;
-            
-            document.querySelector('.meteor-shower').appendChild(meteor);
-            
-            // Xóa meteor sau khi animation kết thúc
-            setTimeout(() => {
-                meteor.remove();
-            }, 3000);
-        }
-
-        // Tạo meteor định kỳ
-        setInterval(createMeteor, 500);
-
         // Scroll animation
         const observerOptions = {
             root: null,
@@ -1134,9 +1083,7 @@
         });
 
         const footer = document.querySelector('footer');
-        const character = document.querySelector('.character');
         observer.observe(footer);
-        observer.observe(character);
 
         // Add floating effect to cards on mouse move
         document.addEventListener('mousemove', (e) => {
