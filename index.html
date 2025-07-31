@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Cá Nhân - Kênh YouTube & TikTok</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
     <style>
         :root {
@@ -35,7 +36,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Be Vietnam Pro', 'Montserrat', sans-serif;
         }
 
         body {
@@ -412,49 +413,39 @@
             border: none;
         }
 
-        .video-grid {
+        .video-options {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             margin-top: 15px;
         }
 
-        .video-card {
+        .video-option {
             background: rgba(52, 152, 219, 0.1);
+            border: 2px solid var(--primary-color);
             border-radius: 10px;
-            overflow: hidden;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
             transition: var(--transition);
-            border: 1px solid rgba(52, 152, 219, 0.2);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .video-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .video-option:hover {
+            transform: translateY(-5px);
+            background: rgba(52, 152, 219, 0.2);
         }
 
-        .video-card:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .option-title {
+            font-weight: bold;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
         }
 
-        .video-thumb {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .video-card:hover .video-thumb {
-            transform: scale(1.1);
-        }
-
-        .video-title {
-            padding: 10px;
+        .option-desc {
             font-size: 0.9rem;
-            font-weight: 600;
+            color: var(--text-color);
         }
 
         /* Footer */
@@ -537,9 +528,97 @@
             bottom: -30px;
         }
 
+        /* Other Links */
+        .other-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .other-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .other-link:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+
+        .donate-box {
+            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 15px;
+            transition: border-color 1s ease;
+        }
+
+        .donate-box img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Welcome Box */
+        .welcome-box {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .welcome-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        #welcome-ok {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: var(--transition);
+        }
+
+        #welcome-ok:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             main {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-options {
                 grid-template-columns: 1fr;
             }
             
@@ -593,6 +672,25 @@
         </div>
         
         <div class="menu-section">
+            <h3>Khác</h3>
+            <div class="other-links">
+                <a href="#" class="other-link" data-link="tiktok">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </a>
+                <a href="#" class="other-link" data-link="ytb1">
+                    <i class="fab fa-youtube"></i> YouTube 1
+                </a>
+                <a href="#" class="other-link" data-link="ytb2">
+                    <i class="fab fa-youtube"></i> YouTube 2
+                </a>
+            </div>
+            <div class="donate-box" id="donate-box">
+                <img src="khac/donate.png" alt="Donate QR Code">
+                <p>Ủng hộ tôi qua QR Code</p>
+            </div>
+        </div>
+        
+        <div class="menu-section">
             <h3>Liên Hệ</h3>
             <p>Email: contact@example.com</p>
             <p>Điện thoại: 0123.456.789</p>
@@ -602,7 +700,7 @@
     <!-- Header Section -->
     <header>
         <div class="profile-container floating">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Profile Picture" class="profile-pic">
+            <img src="avatar/av.png" alt="Profile Picture" class="profile-pic">
         </div>
         <h1>NGUYỄN VĂN A</h1>
         <p class="title blink-text">🎮 Content Creator | Game Reviewer | YouTube & TikTok</p>
@@ -667,22 +765,18 @@
             <section class="card">
                 <div class="card-content">
                     <h2>Hướng Dẫn Chơi Game</h2>
-                    <div class="video-grid">
-                        <div class="video-card">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Tutorial 1" class="video-thumb">
-                            <div class="video-title">Hướng dẫn nhập môn Liên Quân Mobile</div>
+                    <div class="video-options">
+                        <div class="video-option" data-video="vd1">
+                            <div class="option-title">HƯỚNG DẪN CÀI ĐẶT</div>
+                            <div class="option-desc">File MOD cho game</div>
                         </div>
-                        <div class="video-card">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Tutorial 2" class="video-thumb">
-                            <div class="video-title">Cách farm hiệu quả trong Genshin Impact</div>
+                        <div class="video-option" data-video="vd2">
+                            <div class="option-title">CÁCH CHƠI NÂNG CAO</div>
+                            <div class="option-desc">Kỹ thuật pro</div>
                         </div>
-                        <div class="video-card">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_3/hqdefault.jpg" alt="Tutorial 3" class="video-thumb">
-                            <div class="video-title">Kỹ năng sniper trong PUBG Mobile</div>
-                        </div>
-                        <div class="video-card">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_4/hqdefault.jpg" alt="Tutorial 4" class="video-thumb">
-                            <div class="video-title">Build team mạnh trong AFK Arena</div>
+                        <div class="video-option" data-video="vd3">
+                            <div class="option-title">THỦ THUẬT HAY</div>
+                            <div class="option-desc">Mẹo chơi game</div>
                         </div>
                     </div>
                 </div>
@@ -700,9 +794,6 @@
             <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
         </div>
     </footer>
-
-    <!-- YouTube Music Player (Hidden) -->
-    <div id="youtube-player" style="display: none;"></div>
 
     <script>
         // Menu toggle
@@ -728,69 +819,172 @@
             localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
         });
 
-        // Music Player
-        const playBtn = document.getElementById('play-music');
-        const stopBtn = document.getElementById('stop-music');
-        let player;
-        
-        // Load YouTube IFrame API
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        // Music Player with local files
+        const musicFiles = [
+            'music/nhacnen1.mp3',
+            'music/nhacnen2.mp3',
+            'music/nhacnen3.mp3'
+        ];
+        let currentMusic = null;
+        const clickSound = new Audio('music/click.mp3');
 
-        // Create YouTube player
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: 'jfKfPfyJRdk', // Lofi hip hop radio
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': 'jfKfPfyJRdk'
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            // Player is ready
-        }
-
-        playBtn.addEventListener('click', () => {
-            player.playVideo();
-            playBtn.innerHTML = '<i class="fas fa-pause"></i><span>Dừng nhạc</span>';
-            playBtn.id = 'pause-music';
-            playBtn.addEventListener('click', pauseMusic);
+        document.getElementById('play-music').addEventListener('click', function() {
+            clickSound.play();
+            if (currentMusic) currentMusic.pause();
+            
+            const randomMusic = musicFiles[Math.floor(Math.random() * musicFiles.length)];
+            currentMusic = new Audio(randomMusic);
+            currentMusic.loop = true;
+            currentMusic.play();
+            
+            this.innerHTML = '<i class="fas fa-pause"></i><span>Dừng nhạc</span>';
+            this.id = 'pause-music';
+            this.addEventListener('click', pauseMusic);
         });
 
         function pauseMusic() {
-            player.pauseVideo();
-            playBtn.innerHTML = '<i class="fas fa-play"></i><span>Tiếp tục</span>';
-            playBtn.id = 'play-music';
-            playBtn.removeEventListener('click', pauseMusic);
-            playBtn.addEventListener('click', playMusic);
+            clickSound.play();
+            if (currentMusic) {
+                currentMusic.pause();
+                document.getElementById('pause-music').innerHTML = '<i class="fas fa-play"></i><span>Tiếp tục</span>';
+                document.getElementById('pause-music').id = 'play-music';
+                document.getElementById('play-music').removeEventListener('click', pauseMusic);
+                document.getElementById('play-music').addEventListener('click', playMusic);
+            }
         }
 
         function playMusic() {
-            player.playVideo();
-            playBtn.innerHTML = '<i class="fas fa-pause"></i><span>Dừng nhạc</span>';
-            playBtn.id = 'pause-music';
-            playBtn.removeEventListener('click', playMusic);
-            playBtn.addEventListener('click', pauseMusic);
+            clickSound.play();
+            if (currentMusic) {
+                currentMusic.play();
+                document.getElementById('play-music').innerHTML = '<i class="fas fa-pause"></i><span>Dừng nhạc</span>';
+                document.getElementById('play-music').id = 'pause-music';
+                document.getElementById('pause-music').removeEventListener('click', playMusic);
+                document.getElementById('pause-music').addEventListener('click', pauseMusic);
+            }
         }
 
-        stopBtn.addEventListener('click', () => {
-            player.stopVideo();
-            playBtn.innerHTML = '<i class="fas fa-play"></i><span>Bật nhạc nền</span>';
-            playBtn.id = 'play-music';
-            playBtn.removeEventListener('click', pauseMusic);
-            playBtn.addEventListener('click', playMusic);
+        document.getElementById('stop-music').addEventListener('click', function() {
+            clickSound.play();
+            if (currentMusic) {
+                currentMusic.pause();
+                currentMusic.currentTime = 0;
+                document.getElementById('play-music').innerHTML = '<i class="fas fa-play"></i><span>Bật nhạc nền</span>';
+                document.getElementById('play-music').id = 'play-music';
+                document.getElementById('play-music').removeEventListener('click', pauseMusic);
+                document.getElementById('play-music').addEventListener('click', function() {
+                    clickSound.play();
+                    if (currentMusic) currentMusic.pause();
+                    
+                    const randomMusic = musicFiles[Math.floor(Math.random() * musicFiles.length)];
+                    currentMusic = new Audio(randomMusic);
+                    currentMusic.loop = true;
+                    currentMusic.play();
+                    
+                    this.innerHTML = '<i class="fas fa-pause"></i><span>Dừng nhạc</span>';
+                    this.id = 'pause-music';
+                    this.addEventListener('click', pauseMusic);
+                });
+            }
         });
+
+        // Card click effects
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Only trigger if clicking on the card itself, not links inside
+                if (e.target === this || e.target.classList.contains('card-content')) {
+                    clickSound.play();
+                    
+                    // Scale down other cards
+                    cards.forEach(c => {
+                        if (c !== card) {
+                            c.style.transform = 'scale(0.95)';
+                            c.style.opacity = '0.8';
+                        }
+                    });
+                    
+                    // Scale up clicked card
+                    this.style.transform = 'scale(1.05)';
+                    this.style.zIndex = '10';
+                    this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+                }
+            });
+        });
+
+        // Reset cards when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.card')) {
+                cards.forEach(card => {
+                    card.style.transform = '';
+                    card.style.opacity = '';
+                    card.style.zIndex = '';
+                    card.style.boxShadow = '';
+                });
+            }
+        });
+
+        // Video options
+        document.querySelectorAll('.video-option').forEach(option => {
+            option.addEventListener('click', async function() {
+                clickSound.play();
+                const videoId = this.getAttribute('data-video');
+                try {
+                    const response = await fetch(`video/${videoId}.txt`);
+                    const youtubeLink = await response.text();
+                    window.open(youtubeLink, '_blank');
+                } catch (error) {
+                    console.error('Error loading video link:', error);
+                }
+            });
+        });
+
+        // Other links
+        document.querySelectorAll('.other-link').forEach(link => {
+            link.addEventListener('click', async function(e) {
+                e.preventDefault();
+                clickSound.play();
+                const linkType = this.getAttribute('data-link');
+                try {
+                    const response = await fetch(`khac/${linkType}.txt`);
+                    const url = await response.text();
+                    window.open(url, '_blank');
+                } catch (error) {
+                    console.error('Error loading link:', error);
+                }
+            });
+        });
+
+        // Donate box border color change
+        const donateBox = document.getElementById('donate-box');
+        setInterval(() => {
+            const colors = ['#3498db', '#e74c3c', '#9b59b6', '#2ecc71', '#f1c40f'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            donateBox.style.borderColor = randomColor;
+        }, 2000);
+
+        // Welcome message
+        if (!sessionStorage.getItem('welcomeShown')) {
+            setTimeout(() => {
+                const welcomeBox = document.createElement('div');
+                welcomeBox.className = 'welcome-box';
+                welcomeBox.innerHTML = `
+                    <div class="welcome-content">
+                        <h3>CẢM ƠN BẠN ĐÃ ĐẾN VỚI WEBSITE CỦA TÔI</h3>
+                        <p>HIHI</p>
+                        <button id="welcome-ok">OK</button>
+                    </div>
+                `;
+                document.body.appendChild(welcomeBox);
+                
+                document.getElementById('welcome-ok').addEventListener('click', function() {
+                    clickSound.play();
+                    welcomeBox.remove();
+                    sessionStorage.setItem('welcomeShown', 'true');
+                });
+            }, 1000);
+        }
 
         // Scroll animation
         const observerOptions = {
@@ -813,10 +1007,6 @@
             observer.observe(card);
         });
 
-        document.querySelectorAll('.video-card').forEach(card => {
-            observer.observe(card);
-        });
-
         document.querySelectorAll('.social-link').forEach(link => {
             observer.observe(link);
         });
@@ -828,7 +1018,7 @@
 
         // Add floating effect to cards on mouse move
         document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.card');
+            const cards = document.querySelectorAll('.card:not(:hover)');
             cards.forEach(card => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
