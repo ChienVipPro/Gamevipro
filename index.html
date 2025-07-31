@@ -87,23 +87,33 @@
         .side-menu {
             position: fixed;
             top: 0;
-            left: -280px;
+            left: 0;
             width: var(--menu-width);
             height: 100%;
             background: var(--card-bg);
             box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
             z-index: 999;
-            transition: var(--transition);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             padding: 80px 20px 20px;
             overflow-y: auto;
+            transform: translateX(-100%);
         }
 
         .side-menu.open {
-            left: 0;
+            transform: translateX(0);
         }
 
         .menu-section {
             margin-bottom: 25px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
+            transition-delay: calc(0.1s * var(--i));
+        }
+
+        .side-menu.open .menu-section {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .menu-section h3 {
@@ -198,6 +208,27 @@
             color: var(--primary-color);
         }
 
+        .mod-service {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(155, 89, 182, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(155, 89, 182, 0.2);
+            margin-top: 10px;
+        }
+
+        .mod-service:hover {
+            background: rgba(155, 89, 182, 0.2);
+        }
+
+        .mod-service i {
+            color: var(--accent-color);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -222,6 +253,29 @@
             box-shadow: var(--shadow);
             position: relative;
             animation: pulse-border 2s infinite;
+        }
+
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, 
+                #ff0000, #ff7300, #fffb00, #48ff00, 
+                #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%;
+            z-index: -1;
+            animation: borderRotate 10s linear infinite;
+            filter: blur(2px);
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0 0; }
+            50% { background-position: 100% 0; }
+            100% { background-position: 0 0; }
         }
 
         @keyframes pulse-border {
@@ -256,6 +310,12 @@
             color: transparent;
             position: relative;
             display: inline-block;
+            animation: textGlow 2s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(231, 76, 60, 0.8); }
         }
 
         h1::after {
@@ -298,6 +358,29 @@
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; text-shadow: 0 0 10px var(--accent-color); }
+        }
+
+        .marquee-text {
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: marquee 15s linear infinite, colorFlow 5s infinite alternate;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @keyframes colorFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         /* Main Content */
@@ -528,30 +611,7 @@
             bottom: -30px;
         }
 
-        /* Other Links */
-        .other-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .other-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            background: rgba(52, 152, 219, 0.1);
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: var(--transition);
-        }
-
-        .other-link:hover {
-            background: rgba(52, 152, 219, 0.2);
-        }
-
+        /* Donate Box */
         .donate-box {
             border: 3px solid var(--primary-color);
             border-radius: 10px;
@@ -612,6 +672,62 @@
             transform: scale(1.05);
         }
 
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            animation: fadeInOut 3s ease;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        /* Meteor Shower */
+        .meteor-shower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .meteor {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px 2px white;
+            animation: meteorFall linear infinite;
+        }
+
+        @keyframes meteorFall {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(500px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             main {
@@ -632,6 +748,10 @@
             
             .character {
                 display: none;
+            }
+            
+            .marquee-text {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -660,14 +780,18 @@
         <div class="menu-section">
             <h3>Nhạc Nền</h3>
             <div class="music-controls">
-                <div class="music-btn" id="play-music">
-                    <i class="fas fa-play"></i>
-                    <span>Bật nhạc nền</span>
+                <div class="music-btn" id="toggle-music">
+                    <i class="fas fa-music"></i>
+                    <span>Bật/Tắt nhạc nền</span>
                 </div>
-                <div class="music-btn" id="stop-music">
-                    <i class="fas fa-stop"></i>
-                    <span>Dừng nhạc</span>
-                </div>
+            </div>
+        </div>
+        
+        <div class="menu-section">
+            <h3>Dịch Vụ Mod Thuê</h3>
+            <div class="mod-service" id="mod-service">
+                <i class="fas fa-user-cog"></i>
+                <span>Nhấn vào đây để liên hệ thuê mod uy tín</span>
             </div>
         </div>
         
@@ -704,6 +828,10 @@
         </div>
         <h1>NGUYỄN VĂN A</h1>
         <p class="title blink-text">🎮 Content Creator | Game Reviewer | YouTube & TikTok</p>
+        
+        <div class="marquee-text">
+            "Nắng nóng đã có điều hòa, hết tiền đã có fake bill lo"
+        </div>
         
         <!-- Character image -->
         <img src="https://cdn.pixabay.com/photo/2021/08/27/06/06/gamer-6577420_960_720.png" alt="Gamer Character" class="character">
@@ -781,6 +909,17 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Mod Service -->
+            <section class="card">
+                <div class="card-content">
+                    <h2>Dịch Vụ Mod Thuê</h2>
+                    <div class="mod-service" id="mod-service-main">
+                        <i class="fas fa-user-cog"></i>
+                        <span>Nhấn vào đây để liên hệ thuê mod uy tín</span>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -795,6 +934,9 @@
         </div>
     </footer>
 
+    <!-- Meteor Shower -->
+    <div class="meteor-shower"></div>
+
     <script>
         // Menu toggle
         const menuBtn = document.getElementById('menu-btn');
@@ -802,6 +944,11 @@
         
         menuBtn.addEventListener('click', () => {
             sideMenu.classList.toggle('open');
+            
+            // Thêm delay cho các mục menu
+            document.querySelectorAll('.menu-section').forEach((section, index) => {
+                section.style.setProperty('--i', index);
+            });
         });
 
         // Theme Toggle
@@ -817,112 +964,55 @@
         themeToggle.addEventListener('change', () => {
             body.classList.toggle('dark-mode');
             localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+            
+            // Hiển thị toast thông báo
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            toast.textContent = body.classList.contains('dark-mode') 
+                ? 'Bạn đang ở chế độ: Ban đêm' 
+                : 'Bạn đang ở chế độ: Ban ngày';
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
         });
 
-        // Music Player with local files
-        const musicFiles = [
-            'music/nhacnen1.mp3',
-            'music/nhacnen2.mp3',
-            'music/nhacnen3.mp3'
-        ];
+        // Music Player
+        const toggleMusicBtn = document.getElementById('toggle-music');
         let currentMusic = null;
         const clickSound = new Audio('music/click.mp3');
+        let isMusicPlaying = false;
 
-        document.getElementById('play-music').addEventListener('click', function() {
+        toggleMusicBtn.addEventListener('click', function() {
             clickSound.play();
-            if (currentMusic) currentMusic.pause();
             
-            const randomMusic = musicFiles[Math.floor(Math.random() * musicFiles.length)];
-            currentMusic = new Audio(randomMusic);
-            currentMusic.loop = true;
-            currentMusic.play();
-            
-            this.innerHTML = '<i class="fas fa-pause"></i><span>Dừng nhạc</span>';
-            this.id = 'pause-music';
-            this.addEventListener('click', pauseMusic);
-        });
-
-        function pauseMusic() {
-            clickSound.play();
-            if (currentMusic) {
+            if (isMusicPlaying) {
                 currentMusic.pause();
-                document.getElementById('pause-music').innerHTML = '<i class="fas fa-play"></i><span>Tiếp tục</span>';
-                document.getElementById('pause-music').id = 'play-music';
-                document.getElementById('play-music').removeEventListener('click', pauseMusic);
-                document.getElementById('play-music').addEventListener('click', playMusic);
-            }
-        }
-
-        function playMusic() {
-            clickSound.play();
-            if (currentMusic) {
+                isMusicPlaying = false;
+                this.innerHTML = '<i class="fas fa-music"></i><span>Bật nhạc nền</span>';
+            } else {
+                const randomIndex = Math.floor(Math.random() * 3) + 1;
+                currentMusic = new Audio(`music/nhacnen${randomIndex}.mp3`);
+                currentMusic.loop = true;
                 currentMusic.play();
-                document.getElementById('play-music').innerHTML = '<i class="fas fa-pause"></i><span>Dừng nhạc</span>';
-                document.getElementById('play-music').id = 'pause-music';
-                document.getElementById('pause-music').removeEventListener('click', playMusic);
-                document.getElementById('pause-music').addEventListener('click', pauseMusic);
-            }
-        }
-
-        document.getElementById('stop-music').addEventListener('click', function() {
-            clickSound.play();
-            if (currentMusic) {
-                currentMusic.pause();
-                currentMusic.currentTime = 0;
-                document.getElementById('play-music').innerHTML = '<i class="fas fa-play"></i><span>Bật nhạc nền</span>';
-                document.getElementById('play-music').id = 'play-music';
-                document.getElementById('play-music').removeEventListener('click', pauseMusic);
-                document.getElementById('play-music').addEventListener('click', function() {
-                    clickSound.play();
-                    if (currentMusic) currentMusic.pause();
-                    
-                    const randomMusic = musicFiles[Math.floor(Math.random() * musicFiles.length)];
-                    currentMusic = new Audio(randomMusic);
-                    currentMusic.loop = true;
-                    currentMusic.play();
-                    
-                    this.innerHTML = '<i class="fas fa-pause"></i><span>Dừng nhạc</span>';
-                    this.id = 'pause-music';
-                    this.addEventListener('click', pauseMusic);
-                });
+                isMusicPlaying = true;
+                this.innerHTML = '<i class="fas fa-pause"></i><span>Tắt nhạc nền</span>';
             }
         });
 
-        // Card click effects
-        const cards = document.querySelectorAll('.card');
-        
-        cards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Only trigger if clicking on the card itself, not links inside
-                if (e.target === this || e.target.classList.contains('card-content')) {
-                    clickSound.play();
-                    
-                    // Scale down other cards
-                    cards.forEach(c => {
-                        if (c !== card) {
-                            c.style.transform = 'scale(0.95)';
-                            c.style.opacity = '0.8';
-                        }
-                    });
-                    
-                    // Scale up clicked card
-                    this.style.transform = 'scale(1.05)';
-                    this.style.zIndex = '10';
-                    this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+        // Mod Service
+        document.querySelectorAll('.mod-service').forEach(btn => {
+            btn.addEventListener('click', async function() {
+                clickSound.play();
+                try {
+                    const response = await fetch('khac/ib.txt');
+                    const url = await response.text();
+                    window.open(url, '_blank');
+                } catch (error) {
+                    console.error('Error loading link:', error);
                 }
             });
-        });
-
-        // Reset cards when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.card')) {
-                cards.forEach(card => {
-                    card.style.transform = '';
-                    card.style.opacity = '';
-                    card.style.zIndex = '';
-                    card.style.boxShadow = '';
-                });
-            }
         });
 
         // Video options
@@ -982,9 +1072,41 @@
                     clickSound.play();
                     welcomeBox.remove();
                     sessionStorage.setItem('welcomeShown', 'true');
+                    
+                    // Tự động phát nhạc nền ngẫu nhiên
+                    const randomIndex = Math.floor(Math.random() * 3) + 1;
+                    currentMusic = new Audio(`music/nhacnen${randomIndex}.mp3`);
+                    currentMusic.loop = true;
+                    currentMusic.play();
+                    isMusicPlaying = true;
+                    toggleMusicBtn.innerHTML = '<i class="fas fa-pause"></i><span>Tắt nhạc nền</span>';
                 });
             }, 1000);
         }
+
+        // Meteor shower
+        function createMeteor() {
+            const meteor = document.createElement('div');
+            meteor.className = 'meteor';
+            
+            // Random vị trí bắt đầu
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight / 2;
+            
+            meteor.style.left = `${startX}px`;
+            meteor.style.top = `${startY}px`;
+            meteor.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            
+            document.querySelector('.meteor-shower').appendChild(meteor);
+            
+            // Xóa meteor sau khi animation kết thúc
+            setTimeout(() => {
+                meteor.remove();
+            }, 3000);
+        }
+
+        // Tạo meteor định kỳ
+        setInterval(createMeteor, 500);
 
         // Scroll animation
         const observerOptions = {
